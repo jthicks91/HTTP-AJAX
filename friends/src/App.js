@@ -27,7 +27,8 @@ class App extends Component {
       friends: [],
       name: "",
       age: "",
-      email: ""
+      email: "",
+      updateList: ""
     };
   }
 
@@ -75,10 +76,21 @@ class App extends Component {
     };
     axios
       .put(`http://localhost:5000/friends/${id}`, newFriend)
+      .then(
+        this.setState(() => ({
+          updateList: this.state.friends
+        }))
+      )
       .then(res => {
         this.setState({ freinds: res.data });
       })
       .catch(err => console.log(err));
+  };
+
+  updateList = () => {
+    this.state.updateList.localeCompare(friend =>
+      this.addPost(friend.name, friend.age, friend.email)
+    );
   };
 
   deletePost = id => {
@@ -131,7 +143,7 @@ class App extends Component {
               {...props}
               friends={this.state.friends}
               editPost={this.editPost}
-              deletePost={this.editPost}
+              deletePost={this.deletePost}
               inputHandler={this.inputHandler}
               name={this.state.name}
               age={this.state.age}
