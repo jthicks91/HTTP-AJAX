@@ -1,5 +1,7 @@
 import React from "react";
 import "./friends.css";
+import EachFriend from "./EachFriend";
+
 // import styled from "styled-components";
 
 // const FriendsWrapperStyle = styled.div`
@@ -13,12 +15,15 @@ function Friends(props) {
     <div className="friends-wrapper">
       {props.friends.map(friend => {
         return (
-          <div>
-            <h2>{friend.id}</h2>
-            <p>{friend.name}</p>
-            <p>{friend.age}</p>
-            <p>{friend.email}</p>
-          </div>
+          <EachFriend
+            friend={friend}
+            editPost={props.editPost}
+            deletePost={props.deletePost}
+            inputHandler={props.inputHandler}
+            name={props.name}
+            age={props.age}
+            email={props.email}
+          />
         );
       })}
     </div>

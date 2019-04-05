@@ -67,6 +67,29 @@ class App extends Component {
     }
   };
 
+  editPost = (id, updatedName, updatedAge, updatedEmail) => {
+    let newFriend = {
+      name: updatedName,
+      age: updatedAge,
+      email: updatedEmail
+    };
+    axios
+      .put(`http://localhost:5000/friends/${id}`, newFriend)
+      .then(res => {
+        this.setState({ freinds: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+
+  deletePost = id => {
+    axios
+      .delete(`http://localhost:5000/friends/${id}`)
+      .then(res => {
+        this.setState({ friends: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div className="App">
@@ -103,7 +126,18 @@ class App extends Component {
         {/* </FriendFormStyle> */}
         <Route
           path="/"
-          render={props => <Friends {...props} friends={this.state.friends} />}
+          render={props => (
+            <Friends
+              {...props}
+              friends={this.state.friends}
+              editPost={this.editPost}
+              deletePost={this.editPost}
+              inputHandler={this.inputHandler}
+              name={this.state.name}
+              age={this.state.age}
+              email={this.state.email}
+            />
+          )}
         />
       </div>
     );
