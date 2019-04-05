@@ -1,6 +1,5 @@
 import React from "react";
 import "./friends.css";
-// import axios from "axios";
 // import styled from "styled-components";
 
 // const FriendsWrapperStyle = styled.div`
